@@ -6,6 +6,7 @@
 
 #include "reduction_utils.hpp"
 #include <cassert>
+#include <iostream>
 #include <sycl/sycl.hpp>
 
 using namespace sycl;

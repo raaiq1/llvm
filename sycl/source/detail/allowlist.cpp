@@ -256,23 +256,23 @@ AllowListParsedT parseAllowList(const std::string &AllowListRaw) {
 
   if (IsDeprecatedKeyNameDeviceNameWasUsed &&
       IsDeprecatedKeyNamePlatformNameWasUsed) {
-    std::cout << "\nWARNING: " << DeprecatedKeyNameDeviceName << " and "
-              << DeprecatedKeyNamePlatformName
-              << " in SYCL_DEVICE_ALLOWLIST are deprecated. ";
+    sycl::detail::cout << "\nWARNING: " << DeprecatedKeyNameDeviceName
+                       << " and " << DeprecatedKeyNamePlatformName
+                       << " in SYCL_DEVICE_ALLOWLIST are deprecated. ";
   } else if (IsDeprecatedKeyNameDeviceNameWasUsed) {
-    std::cout << "\nWARNING: " << DeprecatedKeyNameDeviceName
-              << " in SYCL_DEVICE_ALLOWLIST is deprecated. ";
+    sycl::detail::cout << "\nWARNING: " << DeprecatedKeyNameDeviceName
+                       << " in SYCL_DEVICE_ALLOWLIST is deprecated. ";
   } else if (IsDeprecatedKeyNamePlatformNameWasUsed) {
-    std::cout << "\nWARNING: " << DeprecatedKeyNamePlatformName
-              << " in SYCL_DEVICE_ALLOWLIST is deprecated. ";
+    sycl::detail::cout << "\nWARNING: " << DeprecatedKeyNamePlatformName
+                       << " in SYCL_DEVICE_ALLOWLIST is deprecated. ";
   }
   if (IsDeprecatedKeyNameDeviceNameWasUsed ||
       IsDeprecatedKeyNamePlatformNameWasUsed) {
-    std::cout << "Please use " << BackendNameKeyName << ", "
-              << DeviceTypeKeyName << " and " << DeviceVendorIdKeyName
-              << " instead. For details, please refer to "
-                 "https://github.com/intel/llvm/blob/sycl/sycl/doc/"
-                 "EnvironmentVariables.md\n\n";
+    sycl::detail::cout << "Please use " << BackendNameKeyName << ", "
+                       << DeviceTypeKeyName << " and " << DeviceVendorIdKeyName
+                       << " instead. For details, please refer to "
+                          "https://github.com/intel/llvm/blob/sycl/sycl/doc/"
+                          "EnvironmentVariables.md\n\n";
   }
 
   return AllowListParsed;

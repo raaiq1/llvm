@@ -14,6 +14,7 @@ add_library(sycl_pi_trace_collector SHARED
   collector.cpp
   pi_trace_collector.cpp
   ze_trace_collector.cpp
+  "${sycl_src_dir}/detail/iostream_proxy.cpp"
 )
 
 find_package(Python3 REQUIRED)

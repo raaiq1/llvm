@@ -27,6 +27,7 @@ add_sycl_plugin(cuda
   SOURCES
     "${sycl_inc_dir}/sycl/detail/pi.h"
     "${sycl_inc_dir}/sycl/detail/pi.hpp"
+    "${sycl_src_dir}/detail/iostream_proxy.cpp"
     "pi_cuda.hpp"
     "pi_cuda.cpp"
   LIBRARIES

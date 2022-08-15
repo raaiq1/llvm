@@ -8,6 +8,7 @@
 #include <algorithm>
 #include <detail/plugin.hpp>
 #include <functional>
+#include <iostream>
 #include <optional>
 
 namespace pi {

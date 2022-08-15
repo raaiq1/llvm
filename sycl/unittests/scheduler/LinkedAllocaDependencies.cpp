@@ -8,6 +8,7 @@
 
 #include "SchedulerTest.hpp"
 #include "SchedulerTestUtils.hpp"
+#include <iostream>
 
 using namespace sycl;
 

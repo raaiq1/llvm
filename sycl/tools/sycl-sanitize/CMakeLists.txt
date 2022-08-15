@@ -10,7 +10,7 @@ link_llvm_libs(sycl-sanitize
 
 target_compile_options(sycl-sanitize PRIVATE -fno-exceptions -fno-rtti)
 
-add_library(sycl_sanitizer_collector SHARED collector.cpp)
+add_library(sycl_sanitizer_collector SHARED collector.cpp "${sycl_src_dir}/detail/iostream_proxy.cpp")
 target_compile_definitions(sycl_sanitizer_collector PRIVATE XPTI_CALLBACK_API_EXPORTS)
 target_link_libraries(sycl_sanitizer_collector PRIVATE xptifw)
 if (TARGET OpenCL-Headers)

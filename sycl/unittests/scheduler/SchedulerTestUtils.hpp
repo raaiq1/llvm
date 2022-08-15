@@ -15,6 +15,7 @@
 
 #include <functional>
 #include <gmock/gmock.h>
+#include <iostream>
 #include <vector>
 
 // This header contains a few common classes/methods used in

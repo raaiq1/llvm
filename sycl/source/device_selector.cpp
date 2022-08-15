@@ -66,12 +66,12 @@ static void traceDeviceSelection(const device &Device, int Score, bool Chosen) {
     auto selectionMsg = Chosen ? "Selected device: -> final score = "
                                : "Candidate device: -> score = ";
 
-    std::cout << "SYCL_PI_TRACE[all]: " << selectionMsg << Score
-              << ((Score < 0) ? " (REJECTED)" : "") << std::endl
-              << "SYCL_PI_TRACE[all]: "
-              << "  platform: " << PlatformName << std::endl
-              << "SYCL_PI_TRACE[all]: "
-              << "  device: " << DeviceName << std::endl;
+    sycl::detail::cout << "SYCL_PI_TRACE[all]: " << selectionMsg << Score
+                       << ((Score < 0) ? " (REJECTED)" : "") << std::endl
+                       << "SYCL_PI_TRACE[all]: "
+                       << "  platform: " << PlatformName << std::endl
+                       << "SYCL_PI_TRACE[all]: "
+                       << "  device: " << DeviceName << std::endl;
   }
 }
 

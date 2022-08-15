@@ -26,7 +26,6 @@
 #include <bitset>
 #include <cstdarg>
 #include <cstring>
-#include <iostream>
 #include <map>
 #include <sstream>
 #include <stddef.h>
@@ -384,8 +383,8 @@ static void initializePlugins(std::vector<plugin> &Plugins) {
   std::vector<std::pair<std::string, backend>> PluginNames = findPlugins();
 
   if (PluginNames.empty() && trace(PI_TRACE_ALL))
-    std::cerr << "SYCL_PI_TRACE[all]: "
-              << "No Plugins Found." << std::endl;
+    sycl::detail::cerr << "SYCL_PI_TRACE[all]: "
+                       << "No Plugins Found." << std::endl;
 
   for (unsigned int I = 0; I < PluginNames.size(); I++) {
     std::shared_ptr<PiPlugin> PluginInformation = std::make_shared<PiPlugin>(
@@ -396,19 +395,19 @@ static void initializePlugins(std::vector<plugin> &Plugins) {
 
     if (!Library) {
       if (trace(PI_TRACE_ALL)) {
-        std::cerr << "SYCL_PI_TRACE[all]: "
-                  << "Check if plugin is present. "
-                  << "Failed to load plugin: " << PluginNames[I].first
-                  << std::endl;
+        sycl::detail::cerr << "SYCL_PI_TRACE[all]: "
+                           << "Check if plugin is present. "
+                           << "Failed to load plugin: " << PluginNames[I].first
+                           << std::endl;
       }
       continue;
     }
 
     if (!bindPlugin(Library, PluginInformation)) {
       if (trace(PI_TRACE_ALL)) {
-        std::cerr << "SYCL_PI_TRACE[all]: "
-                  << "Failed to bind PI APIs to the plugin: "
-                  << PluginNames[I].first << std::endl;
+        sycl::detail::cerr << "SYCL_PI_TRACE[all]: "
+                           << "Failed to bind PI APIs to the plugin: "
+                           << PluginNames[I].first << std::endl;
       }
       continue;
     }
@@ -448,11 +447,11 @@ static void initializePlugins(std::vector<plugin> &Plugins) {
     plugin &NewPlugin = Plugins.emplace_back(
         plugin(PluginInformation, PluginNames[I].second, Library));
     if (trace(TraceLevel::PI_TRACE_BASIC))
-      std::cerr << "SYCL_PI_TRACE[basic]: "
-                << "Plugin found and successfully loaded: "
-                << PluginNames[I].first
-                << " [ PluginVersion: " << NewPlugin.getPiPlugin().PluginVersion
-                << " ]" << std::endl;
+      sycl::detail::cerr << "SYCL_PI_TRACE[basic]: "
+                         << "Plugin found and successfully loaded: "
+                         << PluginNames[I].first << " [ PluginVersion: "
+                         << NewPlugin.getPiPlugin().PluginVersion << " ]"
+                         << std::endl;
   }
 
 #ifdef XPTI_ENABLE_INSTRUMENTATION
@@ -537,7 +536,7 @@ template __SYCL_EXPORT const plugin &getPlugin<backend::ext_oneapi_cuda>();
 //       but for now it is useful to see every failure.
 //
 [[noreturn]] void die(const char *Message) {
-  std::cerr << "pi_die: " << Message << std::endl;
+  sycl::detail::cerr << "pi_die: " << Message << std::endl;
   std::terminate();
 }
 
@@ -588,35 +587,38 @@ std::ostream &operator<<(std::ostream &Out, const DeviceBinaryProperty &P) {
 }
 
 void DeviceBinaryImage::print() const {
-  std::cerr << "  --- Image " << Bin << "\n";
+  sycl::detail::cerr << "  --- Image " << Bin << "\n";
   if (!Bin)
     return;
-  std::cerr << "    Version  : " << (int)Bin->Version << "\n";
-  std::cerr << "    Kind     : " << (int)Bin->Kind << "\n";
-  std::cerr << "    Format   : " << (int)Bin->Format << "\n";
-  std::cerr << "    Target   : " << Bin->DeviceTargetSpec << "\n";
-  std::cerr << "    Bin size : "
-            << ((intptr_t)Bin->BinaryEnd - (intptr_t)Bin->BinaryStart) << "\n";
-  std::cerr << "    Compile options : "
-            << (Bin->CompileOptions ? Bin->CompileOptions : "NULL") << "\n";
-  std::cerr << "    Link options    : "
-            << (Bin->LinkOptions ? Bin->LinkOptions : "NULL") << "\n";
-  std::cerr << "    Entries  : ";
+  sycl::detail::cerr << "    Version  : " << (int)Bin->Version << "\n";
+  sycl::detail::cerr << "    Kind     : " << (int)Bin->Kind << "\n";
+  sycl::detail::cerr << "    Format   : " << (int)Bin->Format << "\n";
+  sycl::detail::cerr << "    Target   : " << Bin->DeviceTargetSpec << "\n";
+  sycl::detail::cerr << "    Bin size : "
+                     << ((intptr_t)Bin->BinaryEnd - (intptr_t)Bin->BinaryStart)
+                     << "\n";
+  sycl::detail::cerr << "    Compile options : "
+                     << (Bin->CompileOptions ? Bin->CompileOptions : "NULL")
+                     << "\n";
+  sycl::detail::cerr << "    Link options    : "
+                     << (Bin->LinkOptions ? Bin->LinkOptions : "NULL") << "\n";
+  sycl::detail::cerr << "    Entries  : ";
   for (_pi_offload_entry EntriesIt = Bin->EntriesBegin;
        EntriesIt != Bin->EntriesEnd; ++EntriesIt)
-    std::cerr << EntriesIt->name << " ";
-  std::cerr << "\n";
-  std::cerr << "    Properties [" << Bin->PropertySetsBegin << "-"
-            << Bin->PropertySetsEnd << "]:\n";
+    sycl::detail::cerr << EntriesIt->name << " ";
+  sycl::detail::cerr << "\n";
+  sycl::detail::cerr << "    Properties [" << Bin->PropertySetsBegin << "-"
+                     << Bin->PropertySetsEnd << "]:\n";
 
   for (pi_device_binary_property_set PS = Bin->PropertySetsBegin;
        PS != Bin->PropertySetsEnd; ++PS) {
-    std::cerr << "      Category " << PS->Name << " [" << PS->PropertiesBegin
-              << "-" << PS->PropertiesEnd << "]:\n";
+    sycl::detail::cerr << "      Category " << PS->Name << " ["
+                       << PS->PropertiesBegin << "-" << PS->PropertiesEnd
+                       << "]:\n";
 
     for (pi_device_binary_property P = PS->PropertiesBegin;
          P != PS->PropertiesEnd; ++P) {
-      std::cerr << "        " << DeviceBinaryProperty(P) << "\n";
+      sycl::detail::cerr << "        " << DeviceBinaryProperty(P) << "\n";
     }
   }
 }

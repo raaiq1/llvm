@@ -115,7 +115,7 @@ static bool PrintPiTrace = false;
 
 static void PiTrace(std::string TraceString) {
   if (PrintPiTrace) {
-    std::cout << TraceString << std::endl;
+    sycl::detail::cout << TraceString << std::endl;
   }
 }
 
@@ -374,27 +374,27 @@ extern "C" {
 
 #define DIE_NO_IMPLEMENTATION                                                  \
   if (PrintPiTrace) {                                                          \
-    std::cerr << "Not Implemented : " << __FUNCTION__                          \
-              << " - File : " << __FILE__;                                     \
-    std::cerr << " / Line : " << __LINE__ << std::endl;                        \
+    sycl::detail::cerr << "Not Implemented : " << __FUNCTION__                 \
+                       << " - File : " << __FILE__;                            \
+    sycl::detail::cerr << " / Line : " << __LINE__ << std::endl;               \
   }                                                                            \
   return PI_ERROR_INVALID_OPERATION;
 
 #define CONTINUE_NO_IMPLEMENTATION                                             \
   if (PrintPiTrace) {                                                          \
-    std::cerr << "Warning : Not Implemented : " << __FUNCTION__                \
-              << " - File : " << __FILE__;                                     \
-    std::cerr << " / Line : " << __LINE__ << std::endl;                        \
+    sycl::detail::cerr << "Warning : Not Implemented : " << __FUNCTION__       \
+                       << " - File : " << __FILE__;                            \
+    sycl::detail::cerr << " / Line : " << __LINE__ << std::endl;               \
   }                                                                            \
   return PI_SUCCESS;
 
 #define CASE_PI_UNSUPPORTED(not_supported)                                     \
   case not_supported:                                                          \
     if (PrintPiTrace) {                                                        \
-      std::cerr << std::endl                                                   \
-                << "Unsupported PI case : " << #not_supported << " in "        \
-                << __FUNCTION__ << ":" << __LINE__ << "(" << __FILE__ << ")"   \
-                << std::endl;                                                  \
+      sycl::detail::cerr << std::endl                                          \
+                         << "Unsupported PI case : " << #not_supported         \
+                         << " in " << __FUNCTION__ << ":" << __LINE__ << "("   \
+                         << __FILE__ << ")" << std::endl;                      \
     }                                                                          \
     return PI_ERROR_INVALID_OPERATION;
 

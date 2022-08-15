@@ -36,6 +36,7 @@
 #include <sycl/queue.hpp>
 
 #include <functional>
+#include <iostream>
 #include <optional>
 
 namespace sycl {

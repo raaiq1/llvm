@@ -146,8 +146,8 @@ static inline std::string codeToString(pi_int32 code) {
   {                                                                            \
     auto code = expr;                                                          \
     if (code != PI_SUCCESS) {                                                  \
-      std::cerr << __SYCL_PI_ERROR_REPORT << sycl::detail::codeToString(code)  \
-                << std::endl;                                                  \
+      sycl::detail::cerr << __SYCL_PI_ERROR_REPORT                             \
+                         << sycl::detail::codeToString(code) << std::endl;     \
     }                                                                          \
   }
 #endif

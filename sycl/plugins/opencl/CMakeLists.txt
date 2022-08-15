@@ -13,6 +13,7 @@
 add_sycl_plugin(opencl
   SOURCES
     "${sycl_inc_dir}/sycl/detail/pi.h"
+    "${sycl_src_dir}/detail/iostream_proxy.cpp"
     "pi_opencl.cpp"
   LIBRARIES
     OpenCL-ICD

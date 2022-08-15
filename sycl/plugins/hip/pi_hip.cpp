@@ -202,7 +202,7 @@ pi_result check_error(hipError_t result, const char *function, int line,
        << "\n\tFunction:        " << function << "\n\tSource Location: " << file
        << ":" << line << "\n"
        << std::endl;
-    std::cerr << ss.str();
+    sycl::detail::cerr << ss.str();
   }
 
   if (std::getenv("PI_HIP_ABORT") != nullptr) {
@@ -389,13 +389,13 @@ namespace pi {
 //       but for now it is useful to see every failure.
 //
 [[noreturn]] void die(const char *Message) {
-  std::cerr << "pi_die: " << Message << std::endl;
+  sycl::detail::cerr << "pi_die: " << Message << std::endl;
   std::terminate();
 }
 
 // Reports error messages
 void hipPrint(const char *Message) {
-  std::cerr << "pi_print: " << Message << std::endl;
+  sycl::detail::cerr << "pi_print: " << Message << std::endl;
 }
 
 void assertion(bool Condition, const char *Message) {

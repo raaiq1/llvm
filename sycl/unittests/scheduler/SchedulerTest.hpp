@@ -8,9 +8,9 @@
 
 #pragma once
 
-#include <sycl/queue.hpp>
-
 #include <gtest/gtest.h>
+#include <iostream>
+#include <sycl/queue.hpp>
 
 class SchedulerTest : public ::testing::Test {
 protected:

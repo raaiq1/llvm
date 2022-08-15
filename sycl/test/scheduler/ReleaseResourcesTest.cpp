@@ -9,9 +9,9 @@
 //
 //===----------------------------------------------------------------------===//
 
-#include <sycl/sycl.hpp>
-
 #include "../helpers.hpp"
+#include <iostream>
+#include <sycl/sycl.hpp>
 
 using sycl_access_mode = sycl::access::mode;
 

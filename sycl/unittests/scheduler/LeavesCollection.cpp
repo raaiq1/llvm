@@ -10,6 +10,7 @@
 
 #include <detail/scheduler/leaves_collection.hpp>
 #include <gtest/gtest.h>
+#include <iostream>
 #include <memory>
 #include <sycl/sycl.hpp>
 

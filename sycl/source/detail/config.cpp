@@ -149,8 +149,8 @@ void dumpConfig() {
 #define CONFIG(Name, MaxSize, CompileTimeDef)                                  \
   {                                                                            \
     const char *Val = SYCLConfigBase<Name>::getRawValue();                     \
-    std::cerr << SYCLConfigBase<Name>::MConfigName << " : "                    \
-              << (Val ? Val : "unset") << std::endl;                           \
+    sycl::detail::cerr << SYCLConfigBase<Name>::MConfigName << " : "           \
+                       << (Val ? Val : "unset") << std::endl;                  \
   }
 #include "detail/config.def"
 #undef CONFIG

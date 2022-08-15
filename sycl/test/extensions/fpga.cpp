@@ -1,8 +1,8 @@
 // RUN: %clangxx -fsycl %s -o %t.out
 
+#include <iostream>
 #include <sycl/ext/intel/fpga_extensions.hpp>
 #include <sycl/sycl.hpp>
-
 #include <type_traits>
 
 namespace intelfpga {

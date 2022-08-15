@@ -105,6 +105,7 @@ endif()
 add_sycl_plugin(esimd_emulator
   SOURCES
     "${sycl_inc_dir}/sycl/detail/pi.h"
+    "${sycl_src_dir}/detail/iostream_proxy.cpp"
     "pi_esimd_emulator.cpp"
   LIBRARIES
     "${LEVEL_ZERO_LOADER}"

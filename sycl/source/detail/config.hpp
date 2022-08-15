@@ -296,11 +296,12 @@ public:
     // Emit the deprecation warning message if SYCL_BE or SYCL_DEVICE_TYPE is
     // set.
     if (SYCLConfig<SYCL_BE>::get() || getenv("SYCL_DEVICE_TYPE")) {
-      std::cerr << "\nWARNING: The legacy environment variables SYCL_BE and "
-                   "SYCL_DEVICE_TYPE are deprecated. Please use "
-                   "SYCL_DEVICE_FILTER instead. For details, please refer to "
-                   "https://github.com/intel/llvm/blob/sycl/sycl/doc/"
-                   "EnvironmentVariables.md\n\n";
+      sycl::detail::cerr
+          << "\nWARNING: The legacy environment variables SYCL_BE and "
+             "SYCL_DEVICE_TYPE are deprecated. Please use "
+             "SYCL_DEVICE_FILTER instead. For details, please refer to "
+             "https://github.com/intel/llvm/blob/sycl/sycl/doc/"
+             "EnvironmentVariables.md\n\n";
     }
 
     // As mentioned above, configuration parameters are processed only once.
@@ -394,7 +395,7 @@ private:
   static bool parseValue() {
     // Check if deprecated opt-out env var is used, then warn.
     if (SYCLConfig<SYCL_CACHE_DISABLE_PERSISTENT>::get()) {
-      std::cerr
+      sycl::detail::cerr
           << "WARNING: " << SYCLConfig<SYCL_CACHE_DISABLE_PERSISTENT>::getName()
           << " environment variable is deprecated "
           << "and has no effect. By default, persistent device code caching is "
